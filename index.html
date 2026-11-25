@@ -6,194 +6,605 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#123d32">
 <title>Saki Climate Resilience Dashboard</title>
+
 <style>
-:root{--green:#123d32;--green2:#1d5b49;--mint:#e9f4ee;--ink:#18332c;--muted:#65766f;--line:#dce7e0;--amber:#fff4dc}
+:root{
+  --green:#123d32;
+  --green2:#1d5b49;
+  --mint:#e9f4ee;
+  --ink:#18332c;
+  --muted:#65766f;
+  --line:#dce7e0;
+  --amber:#fff4dc;
+}
+
 *{box-sizing:border-box}
-body{margin:0;background:#f4f7f5;color:var(--ink);font:15px/1.5 Arial,Helvetica,sans-serif}
-header{background:var(--green);color:white;padding:24px 18px 30px}
+
+body{
+  margin:0;
+  background:#f4f7f5;
+  color:var(--ink);
+  font:15px/1.5 Arial,Helvetica,sans-serif;
+}
+
+header{
+  background:var(--green);
+  color:white;
+  padding:24px 18px 30px;
+}
+
 .wrap{max-width:1050px;margin:auto}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.brand{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#c6dfd2;font-weight:700}
-.pilot{border:1px solid #719789;border-radius:30px;padding:6px 11px;font-size:12px}
-h1{font-size:clamp(25px,5vw,38px);line-height:1.12;margin:22px 0 8px}
-header p{margin:0;color:#d6e8df;max-width:680px}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.brand{
+  font-size:13px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#c6dfd2;
+  font-weight:700;
+}
+
+.pilot{
+  border:1px solid #719789;
+  border-radius:30px;
+  padding:6px 11px;
+  font-size:12px;
+}
+
+h1{
+  font-size:clamp(25px,5vw,38px);
+  line-height:1.12;
+  margin:22px 0 8px;
+}
+
+header p{
+  margin:0;
+  color:#d6e8df;
+  max-width:680px;
+}
+
 main{padding:22px 16px 40px}
-.search{display:flex;gap:8px;margin-bottom:18px}
-input{min-width:0;flex:1;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:15px}
-button{border:0;background:var(--green2);color:white;border-radius:10px;padding:0 18px;font-weight:700;cursor:pointer}
-.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:18px;margin:0 0 15px;box-shadow:0 3px 12px #193d3210}
-.panel h2{font-size:18px;margin:0 0 13px}
-.sub{font-size:13px;color:var(--muted);margin-top:-8px}
-.weather{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:center}
-.temp{font-size:52px;font-weight:700;letter-spacing:-2px}
-.condition{font-size:17px;text-transform:capitalize}
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.metric{background:var(--mint);border-radius:10px;padding:12px}
-.metric small{display:block;color:var(--muted);font-size:12px}
+
+.search{
+  display:flex;
+  gap:8px;
+  margin-bottom:18px;
+}
+
+input{
+  min-width:0;
+  flex:1;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px;
+  font-size:15px;
+}
+
+button{
+  border:0;
+  background:var(--green2);
+  color:white;
+  border-radius:10px;
+  padding:0 18px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.panel{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:18px;
+  margin:0 0 15px;
+  box-shadow:0 3px 12px #193d3210;
+}
+
+.panel h2{
+  font-size:18px;
+  margin:0 0 13px;
+}
+
+.sub{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:-8px;
+}
+
+.weather{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:14px;
+  align-items:center;
+}
+
+.temp{
+  font-size:52px;
+  font-weight:700;
+  letter-spacing:-2px;
+}
+
+.condition{
+  font-size:17px;
+  text-transform:capitalize;
+}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.metric{
+  background:var(--mint);
+  border-radius:10px;
+  padding:12px;
+}
+
+.metric small{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+}
+
 .metric strong{font-size:18px}
-.notice{border-radius:10px;padding:12px 14px;background:var(--amber);font-size:13px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.status{display:inline-block;background:#f0f2f1;color:#58665f;border-radius:30px;padding:4px 9px;font-size:11px;font-weight:700;margin-bottom:8px}
+
+.notice{
+  border-radius:10px;
+  padding:12px 14px;
+  background:var(--amber);
+  font-size:13px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.status{
+  display:inline-block;
+  background:#f0f2f1;
+  color:#58665f;
+  border-radius:30px;
+  padding:4px 9px;
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
 ul{padding-left:19px;margin:8px 0}
 li{margin:5px 0}
-.foot{font-size:12px;color:var(--muted);text-align:center;padding:12px}
-#error{color:#9b342d;font-size:13px;margin-top:8px}
-@media(max-width:650px){.weather,.grid{grid-template-columns:1fr}.temp{font-size:46px}}
+
+.foot{
+  font-size:12px;
+  color:var(--muted);
+  text-align:center;
+  padding:12px;
+}
+
+#error,#forecastError{
+  color:#9b342d;
+  font-size:13px;
+  margin-top:8px;
+}
+
+/* Forecast display */
+
+.forecast-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:12px;
+}
+
+.forecast-day{
+  background:var(--mint);
+  border-radius:10px;
+  padding:13px;
+  min-width:0;
+}
+
+.forecast-day strong{
+  display:block;
+  margin-bottom:6px;
+}
+
+.forecast-day p{
+  margin:5px 0;
+  font-size:13px;
+}
+
+.forecast-condition{
+  text-transform:capitalize;
+  color:var(--muted);
+}
+
+.forecast-temp{
+  font-size:17px;
+  font-weight:700;
+}
+
+.forecast-note{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:14px;
+}
+
+@media(max-width:650px){
+  .weather,.grid{grid-template-columns:1fr}
+  .temp{font-size:46px}
+  .forecast-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:360px){
+  .forecast-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
+
 <body>
 
 <header>
 <div class="wrap">
-<div class="top">
-<div class="brand">Community climate information</div>
-<div class="pilot">PILOT · OYO STATE, NIGERIA</div>
-</div>
-<h1>Saki Climate Resilience Dashboard</h1>
-<p>Local weather awareness and a developing view of climate-related community resilience.</p>
+  <div class="top">
+    <div class="brand">Community climate information</div>
+    <div class="pilot">PILOT · OYO STATE, NIGERIA</div>
+  </div>
+
+  <h1>Saki Climate Resilience Dashboard</h1>
+  <p>Local weather awareness and a developing view of climate-related community resilience.</p>
 </div>
 </header>
 
 <main class="wrap">
 
 <div class="search">
-<input id="city" value="Saki,NG" aria-label="City" placeholder="Enter a city, e.g. Saki,NG">
-<button onclick="loadWeather()">Check weather</button>
+  <input id="city" value="Saki,NG"
+    aria-label="City"
+    placeholder="Enter a city, e.g. Saki,NG">
+  <button onclick="loadDashboard()">Check weather</button>
 </div>
 
 <section class="panel">
-<h2>Weather now</h2>
-<p class="sub">Current conditions · live weather service</p>
-<div class="weather">
-<div>
-<div class="temp" id="temp">--°C</div>
-<div class="condition" id="condition">Loading current conditions…</div>
-<div id="place" class="sub"></div>
-</div>
-<div class="metrics">
-<div class="metric"><small>Feels like</small><strong id="feels">--°C</strong></div>
-<div class="metric"><small>Humidity</small><strong id="humidity">--%</strong></div>
-<div class="metric"><small>Wind</small><strong id="wind">-- m/s</strong></div>
-</div>
-</div>
-<div id="error"></div>
-<p class="sub" id="updated">Weather data has not yet loaded.</p>
+  <h2>Weather now</h2>
+  <p class="sub">Current conditions · live weather service</p>
+
+  <div class="weather">
+    <div>
+      <div class="temp" id="temp">--°C</div>
+      <div class="condition" id="condition">Loading current conditions…</div>
+      <div id="place" class="sub"></div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <small>Feels like</small>
+        <strong id="feels">--°C</strong>
+      </div>
+
+      <div class="metric">
+        <small>Humidity</small>
+        <strong id="humidity">--%</strong>
+      </div>
+
+      <div class="metric">
+        <small>Wind</small>
+        <strong id="wind">-- m/s</strong>
+      </div>
+    </div>
+  </div>
+
+  <div id="error"></div>
+  <p class="sub" id="updated">Weather data has not yet loaded.</p>
+</section>
+
+<!-- Five-day forecast section -->
+
+<section class="panel">
+  <h2>Upcoming weather forecast</h2>
+  <p class="sub">Daily forecast estimates · Saki, Oyo State</p>
+
+  <div id="forecastStatus" class="status">
+    FORECAST LOADING
+  </div>
+
+  <div id="forecastList" class="forecast-grid"></div>
+
+  <div id="forecastError"></div>
+
+  <p class="forecast-note">
+    Forecast values are estimates aggregated from three-hour intervals.
+    Rain probability represents the highest interval probability for each
+    displayed date. These are not observed rainfall measurements or official
+    weather warnings.
+  </p>
 </section>
 
 <div class="grid">
 
 <section class="panel">
-<h2>Heat and rainfall awareness</h2>
-<div class="status">BASIC GUIDANCE · NOT AN OFFICIAL WARNING</div>
-<p id="heatAdvice">Once current weather loads, this panel will show general heat-awareness guidance.</p>
-<ul>
-<li>Drink safe water regularly, especially during hot periods.</li>
-<li>Reduce strenuous outdoor activity during the hottest part of the day.</li>
-<li>For heavy rain, avoid crossing flooded roads or flowing water.</li>
-</ul>
-<p class="sub">A forecast feed is not yet connected. This prototype displays current conditions only.</p>
+  <h2>Heat and rainfall awareness</h2>
+  <div class="status">BASIC GUIDANCE · NOT AN OFFICIAL WARNING</div>
+
+  <p id="heatAdvice">
+    Once current weather loads, this panel will show general heat-awareness guidance.
+  </p>
+
+  <ul>
+    <li>Drink safe water regularly, especially during hot periods.</li>
+    <li>Reduce strenuous outdoor activity during the hottest part of the day.</li>
+    <li>For heavy rain, avoid crossing flooded roads or flowing water.</li>
+  </ul>
+
+  <p class="sub">
+    Current conditions and forecast estimates are displayed separately.
+  </p>
 </section>
 
 <section class="panel">
-<h2>Water security</h2>
-<div class="status">LOCAL DATA NOT CONNECTED</div>
-<p>No verified community water-supply reports are currently connected to this dashboard.</p>
-<ul>
-<li>Report the location and date of a water shortage.</li>
-<li>Record whether the issue affects a household, street or wider community.</li>
-<li>Use treated or otherwise safe drinking water.</li>
-</ul>
+  <h2>Water security</h2>
+  <div class="status">LOCAL DATA NOT CONNECTED</div>
+
+  <p>No verified community water-supply reports are currently connected to this dashboard.</p>
+
+  <ul>
+    <li>Report the location and date of a water shortage.</li>
+    <li>Record whether the issue affects a household, street or wider community.</li>
+    <li>Use treated or otherwise safe drinking water.</li>
+  </ul>
 </section>
 
 <section class="panel">
-<h2>Electricity resilience</h2>
-<div class="status">OUTAGE FEED NOT CONNECTED</div>
-<p>Electricity availability and outage duration are not currently measured here.</p>
-<ul>
-<li>Community reports would need a location and timestamp.</li>
-<li>Reports should be checked before being treated as confirmed events.</li>
-</ul>
+  <h2>Electricity resilience</h2>
+  <div class="status">OUTAGE FEED NOT CONNECTED</div>
+
+  <p>Electricity availability and outage duration are not currently measured here.</p>
+
+  <ul>
+    <li>Community reports would need a location and timestamp.</li>
+    <li>Reports should be checked before being treated as confirmed events.</li>
+  </ul>
 </section>
 
 <section class="panel">
-<h2>Community vulnerability</h2>
-<div class="status">INDEX NOT YET CALCULATED</div>
-<p>A credible Community Climate Vulnerability Index requires transparent, local evidence on:</p>
-<ul>
-<li><b>Hazard:</b> heat, intense rainfall and flooding.</li>
-<li><b>Exposure:</b> people, homes, farms and infrastructure in affected areas.</li>
-<li><b>Coping capacity:</b> access to water, electricity, health services, transport and other resources.</li>
-</ul>
-<p class="sub">No numerical vulnerability score is presented until suitable data and a documented method are available.</p>
+  <h2>Community vulnerability</h2>
+  <div class="status">INDEX NOT YET CALCULATED</div>
+
+  <p>A credible Community Climate Vulnerability Index requires transparent, local evidence on:</p>
+
+  <ul>
+    <li><b>Hazard:</b> heat, intense rainfall and flooding.</li>
+    <li><b>Exposure:</b> people, homes, farms and infrastructure in affected areas.</li>
+    <li><b>Coping capacity:</b> access to water, electricity, health services, transport and other resources.</li>
+  </ul>
+
+  <p class="sub">
+    No numerical vulnerability score is presented until suitable data and a documented method are available.
+  </p>
 </section>
 
 </div>
 
 <section class="panel">
-<h2>Data transparency</h2>
-<ul>
-<li><b>Current weather:</b> retrieved from the configured weather service through this website's API endpoint.</li>
-<li><b>Forecasts and official alerts:</b> not integrated in this version.</li>
-<li><b>Electricity and water:</b> no verified local feed or community-report database connected.</li>
-<li><b>Vulnerability index:</b> not calculated; methodology and local datasets are still required.</li>
-</ul>
+  <h2>Data transparency</h2>
+
+  <ul>
+    <li><b>Current weather:</b> retrieved from the configured weather service through this website's API endpoint.</li>
+    <li><b>Forecast:</b> retrieved from a separate forecast API endpoint and aggregated into daily estimates.</li>
+    <li><b>Official alerts:</b> not integrated.</li>
+    <li><b>Electricity and water:</b> no verified local feed or community-report database connected.</li>
+    <li><b>Vulnerability index:</b> not calculated; methodology and local datasets are still required.</li>
+  </ul>
 </section>
 
-<div class="foot">Saki pilot · Oyo State, Nigeria · Prototype v1</div>
+<div class="foot">
+  Saki pilot · Oyo State, Nigeria · Prototype v2
+</div>
+
 </main>
 
 <script>
+
 async function loadWeather(){
- const city=document.getElementById('city').value.trim();
- const error=document.getElementById('error');
 
- if(!city){
-  error.textContent='Enter a location first.';
-  return;
- }
+  const city=document.getElementById('city').value.trim();
+  const error=document.getElementById('error');
 
- error.textContent='Loading…';
-
- try{
-  const response=await fetch('/api/weather?city='+encodeURIComponent(city));
-  const data=await response.json();
-
-  if(!response.ok){
-   throw new Error(data.error||'Weather service returned an error.');
+  if(!city){
+    error.textContent='Enter a location first.';
+    return;
   }
 
-  document.getElementById('temp').textContent=Math.round(data.main.temp)+'°C';
-  document.getElementById('feels').textContent=Math.round(data.main.feels_like)+'°C';
-  document.getElementById('humidity').textContent=data.main.humidity+'%';
-  document.getElementById('wind').textContent=Number(data.wind.speed).toFixed(1)+' m/s';
-  document.getElementById('condition').textContent=data.weather?.[0]?.description||'Conditions unavailable';
-  document.getElementById('place').textContent=[data.name,data.sys?.country].filter(Boolean).join(', ');
-  document.getElementById('updated').textContent='Updated: '+new Date().toLocaleString();
+  error.textContent='Loading current weather…';
 
-  const feels=data.main.feels_like;
-  let advice='Stay hydrated and monitor how conditions feel, particularly during outdoor work.';
+  try{
 
-  if(feels>=40){
-   advice='Very high apparent heat: avoid strenuous outdoor activity where possible, seek shade or a cool place, and drink safe water regularly. This is general guidance, not an official alert.';
-  }else if(feels>=35){
-   advice='Hot conditions: take frequent breaks in shade, drink safe water and reduce strenuous activity during the hottest hours.';
-  }else if(feels>=30){
-   advice='Warm conditions: maintain hydration and take sensible breaks during prolonged outdoor activity.';
+    const response=await fetch(
+      '/api/weather?city='+encodeURIComponent(city)
+    );
+
+    const data=await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error||'Weather service returned an error.');
+    }
+
+    document.getElementById('temp').textContent=
+      Math.round(data.main.temp)+'°C';
+
+    document.getElementById('feels').textContent=
+      Math.round(data.main.feels_like)+'°C';
+
+    document.getElementById('humidity').textContent=
+      data.main.humidity+'%';
+
+    document.getElementById('wind').textContent=
+      Number(data.wind.speed).toFixed(1)+' m/s';
+
+    document.getElementById('condition').textContent=
+      data.weather?.[0]?.description||'Conditions unavailable';
+
+    document.getElementById('place').textContent=
+      [data.name,data.sys?.country].filter(Boolean).join(', ');
+
+    document.getElementById('updated').textContent=
+      'Updated: '+new Date().toLocaleString();
+
+    const feels=data.main.feels_like;
+
+    let advice=
+      'Stay hydrated and monitor how conditions feel, particularly during outdoor work.';
+
+    if(feels>=40){
+
+      advice=
+        'Very high apparent heat: avoid strenuous outdoor activity where possible, seek shade or a cool place, and drink safe water regularly. This is general guidance, not an official alert.';
+
+    }else if(feels>=35){
+
+      advice=
+        'Hot conditions: take frequent breaks in shade, drink safe water and reduce strenuous activity during the hottest hours.';
+
+    }else if(feels>=30){
+
+      advice=
+        'Warm conditions: maintain hydration and take sensible breaks during prolonged outdoor activity.';
+
+    }
+
+    document.getElementById('heatAdvice').textContent=advice;
+    error.textContent='';
+
+  }catch(e){
+
+    error.textContent=
+      'Unable to load weather: '+e.message+
+      ' Check that the Cloudflare API function is deployed and configured.';
+
   }
-
-  document.getElementById('heatAdvice').textContent=advice;
-  error.textContent='';
-
- }catch(e){
-  error.textContent='Unable to load weather: '+e.message+' Check that the Cloudflare API function is deployed and configured.';
- }
 }
 
+
+async function loadForecast(){
+
+  const city=document.getElementById('city').value.trim();
+
+  const status=document.getElementById('forecastStatus');
+  const list=document.getElementById('forecastList');
+  const error=document.getElementById('forecastError');
+
+  if(!city){
+    error.textContent='Enter a location to load the forecast.';
+    return;
+  }
+
+  status.textContent='FORECAST LOADING';
+  list.replaceChildren();
+  error.textContent='';
+
+  try{
+
+    const response=await fetch(
+      '/api/forecast?city='+encodeURIComponent(city)
+    );
+
+    const data=await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error||'Unable to retrieve forecast.');
+    }
+
+    if(!Array.isArray(data.forecast)||data.forecast.length===0){
+      throw new Error('No forecast information was returned.');
+    }
+
+    status.textContent=
+      'FORECAST AVAILABLE · '+data.forecast.length+' DATES';
+
+    data.forecast.forEach(day=>{
+
+      const card=document.createElement('div');
+      card.className='forecast-day';
+
+      const date=document.createElement('strong');
+
+      const parsedDate=new Date(day.date+'T12:00:00');
+
+      date.textContent=Number.isNaN(parsedDate.getTime())
+        ?day.date
+        :parsedDate.toLocaleDateString('en-GB',{
+          weekday:'short',
+          day:'numeric',
+          month:'short'
+        });
+
+      const condition=document.createElement('p');
+      condition.className='forecast-condition';
+      condition.textContent=day.condition||'Condition unavailable';
+
+      const temperature=document.createElement('p');
+      temperature.className='forecast-temp';
+
+      temperature.textContent=
+        Number(day.minTemp).toFixed(1)+'° / '+
+        Number(day.maxTemp).toFixed(1)+'°C';
+
+      const rainProbability=document.createElement('p');
+
+      rainProbability.textContent=
+        'Rain chance: '+
+        Math.round(Number(day.rainProbability||0)*100)+'%';
+
+      const rainfall=document.createElement('p');
+
+      rainfall.textContent=
+        'Rain estimate: '+
+        Number(day.rainfall||0).toFixed(1)+' mm';
+
+      card.append(
+        date,
+        condition,
+        temperature,
+        rainProbability,
+        rainfall
+      );
+
+      list.appendChild(card);
+
+    });
+
+  }catch(e){
+
+    status.textContent='FORECAST UNAVAILABLE';
+
+    error.textContent=
+      'Unable to load forecast: '+e.message;
+
+  }
+
+}
+
+
+function loadDashboard(){
+  loadWeather();
+  loadForecast();
+}
+
+
 document.getElementById('city').addEventListener('keydown',e=>{
- if(e.key==='Enter')loadWeather();
+  if(e.key==='Enter')loadDashboard();
 });
 
-loadWeather();
+
+loadDashboard();
+
 </script>
 
 </body>
